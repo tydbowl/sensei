@@ -31,6 +31,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // Each state's controller can be found in controllers.js
   $stateProvider
 
+  //Advertiser selector screen...
+  .state('select', {
+    url          : '/select',
+    templateUrl  : 'templates/select.html',
+    controller   : 'AdvSelectCtrl'
+  })
+
   // setup an abstract state for the tabs directive
     .state('tab', {
     url: '/tab',

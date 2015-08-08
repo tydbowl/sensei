@@ -9,8 +9,8 @@ angular.module('starter', [
   'ionic',
   'starter.controllers',
   'starter.controllers.login',
-  'starter.services']
-)
+  'starter.services'
+])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

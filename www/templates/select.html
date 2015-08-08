@@ -1,6 +1,6 @@
 <ion-view view-title="Select an Advertiser">
   <ion-content class="padding">
-    <div class="list list-inset">
+    <div class="list list-inset" ng-show="advertisers && advertisers.length > 10">
       <label class="item item-input">
         <i class="icon ion-search placeholder-icon"></i>
         <input type="text" placeholder="Search" ng-model="search">

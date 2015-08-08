@@ -6,6 +6,8 @@ angular.module('starter.controllers.login', ['ipCookie'])
   $scope.signIn = signIn;
 
   function signIn(user) {
+    $scope.error = null;
+    
     api.post('login', {
       username  : user.username,
       password  : user.password

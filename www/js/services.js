@@ -1,5 +1,22 @@
 angular.module('starter.services', [])
 
+.factory('api', ['$http', function api($http) {
+  function httpFactory(method) {
+    var ROOT_URL = 'http://sand-api.triplelift.net/'
+    return function httpRequest(url, params, config) {
+      config = config || {};
+      return $http[method](ROOT_URL + url, params, config);
+    };
+  }
+
+  return {
+    get   : httpFactory('get'),
+    post  : httpFactory('post'),
+    put   : httpFactory('put'),
+    del   : httpFactory('delete')
+  };
+}])
+
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
 

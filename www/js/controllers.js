@@ -1,5 +1,21 @@
 angular.module('starter.controllers', [])
 
+.controller('AdvSelectCtrl', function($scope, api) {
+
+  getAdvertisers();
+
+  function getAdvertisers() {
+    return api.get('advertiser', {
+      params: { active: 0 }
+    }).then(renderAdvertisers);
+  }
+
+  function renderAdvertisers(resp) {
+    $scope.advertisers = resp.data.advertisers;
+    $scope.fetched     = true;
+  }
+})
+
 .controller('DashCtrl', function($scope) {})
 
 .controller('ChatsCtrl', function($scope, Chats) {

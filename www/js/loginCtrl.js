@@ -1,28 +1,35 @@
 angular.module('starter.controllers.login', ['ipCookie'])
 
-.controller('LoginCtrl', function($scope, ipCookie, $http){
-  $scope.hello = {name: 'jonathan'};
+.controller('LoginCtrl', function($scope, ipCookie, api, $state){
 
-  $scope.user = {};
+  $scope.user   = {};
+  $scope.signIn = signIn;
 
-  $scope.$watch('user', function(user){console.log("user: ", user)}, true);
-
-  function attemptLogin() {
+  function signIn(user) {
     api.post('login', {
-      username  : $scope.email,
-      password  : $scope.pw
+      username  : user.username,
+      password  : user.password
     })
-    .success($scope.success('login', $scope.rememberMe))
-    .error(fail);
+    .success(success('login'))
+    .error(fail({message: "Login failed: Please login again or kill yourself"}));
   }
 
-  function setLogin(cookieName, data, rememberMe) {
-    var opt = { path: '/', domain: DOMAIN };
+  function success(cookieName, rememberUser){
+    return function (data) {
+      console.log("cookie data: ", data);
+      setLogin(cookieName, data, rememberUser);
+      $state.go('advertisers');
+    };
+  }
 
-    if (rememberMe) {
-      opt.expires = 1000;
-    }
+  function fail(obj){
+    return function(data){
+      $scope.error = obj.message;
+    };
+  }
 
+  function setLogin(cookieName, data) {
+    var opt = { path: '/', expires: 1000 };
     ipCookie(cookieName, data, opt);
   }
 });

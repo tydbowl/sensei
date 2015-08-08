@@ -9,6 +9,7 @@ angular.module('starter', [
   'ionic',
   'starter.controllers',
   'starter.controllers.login',
+  'starter.controllers.advertiser',
   'starter.services'
 ])
 
@@ -28,6 +29,11 @@ angular.module('starter', [
   });
 })
 
+// intercept every $http request and add appropriate auth token!
+.config(function($httpProvider) {
+  $httpProvider.interceptors.push('authToken');
+})
+
 .config(function($stateProvider, $urlRouterProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
@@ -37,17 +43,22 @@ angular.module('starter', [
   $stateProvider
 
   //Advertiser selector screen...
-  .state('select', {
-    url          : '/select',
-    templateUrl  : 'templates/select.html',
-    controller   : 'AdvSelectCtrl'
-  })
-
-  // setup an abstract state for the tabs directive
   .state('login', {
     url: '/login',
     templateUrl: 'templates/login.html',
     controller: 'LoginCtrl'
+  })
+
+  .state('advertisers', {
+    url          : '/advertisers',
+    templateUrl  : 'templates/select.html',
+    controller   : 'AdvSelectCtrl'
+  })
+
+  .state('advertiser', {
+    url          : '/advertiser/:advertiserId',
+    templateUrl  : 'templates/advertiser.html',
+    controller   : 'AdvertiserCtrl'
   })
 
   // setup an abstract state for the tabs directive

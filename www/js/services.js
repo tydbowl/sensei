@@ -17,6 +17,21 @@ angular.module('starter.services', [])
   };
 }])
 
+.factory('authToken', function(ipCookie) {
+
+  return {
+    request: function(config) {
+      config.headers || (config.headers = {});
+
+      var cookie = ipCookie('login');
+      var token = cookie && cookie.token;
+      token && (config.headers['Auth-token'] = token);
+      return config;
+    }
+  };
+
+})
+
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
 

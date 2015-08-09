@@ -29,7 +29,11 @@ angular.module('starter.controllers.advertiser', [])
        .then(getDataForEach('id'))
        .then(qTest('what are my reporting cl ids'))
        .then(reportingPost(makeReportingParams))
-       .then(qTest('reporting data'));
+       .then(qTest('reporting data'))
+       .then(getData('data'))
+       .then(getData('report_id'))
+       .then(generateReport)
+       .then(qTest('what is my reporting data!'));
 
     // var deferreds = [ios, lineItems, tactics, cl];
     // $q.all(deferreds).then(success);
@@ -111,6 +115,10 @@ angular.module('starter.controllers.advertiser', [])
       "start_date": "1969-12-31",
       "end_date": "2015-08-09"
     };
+  }
+
+  function generateReport(reportId){
+    return reporting.displayReport(reportId);
   }
 
 });

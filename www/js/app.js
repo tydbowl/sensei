@@ -10,6 +10,7 @@ angular.module('starter', [
   'starter.controllers',
   'starter.controllers.login',
   'starter.controllers.advertiser',
+  'starter.controllers.advertiser_select',
   'starter.services'
 ])
 

@@ -1,6 +1,6 @@
 angular.module('starter.controllers.advertiser', [])
 
-.controller('AdvertiserCtrl', function($scope, $stateParams, api, $q){
+.controller('AdvertiserCtrl', function($scope, $stateParams, api, $q, reporting){
   $scope.$watch('creativeLibraries', qTest('creativeLibraries'));
 
   var BUYSIDE_URL   = 'native_advertising/buy_side/';

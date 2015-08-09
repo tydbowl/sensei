@@ -10,6 +10,9 @@ angular.module('starter.controllers.advertiser', [])
 
   $scope.advertiserId = ADVERTISER_ID;
 
+  $scope.expand   = expand;
+  $scope.collapse = collapse;
+
   init();
   function init() {
     var params = {params: {advertiser_id: ADVERTISER_ID}};
@@ -111,6 +114,14 @@ angular.module('starter.controllers.advertiser', [])
 
   function generateReport(reportId){
     return reporting.displayReport(reportId);
+  }
+
+  function expand(index){
+    $scope.openIndex = index;
+  }
+
+  function collapse(index){
+    $scope.openIndex = -1;
   }
 
 });

@@ -12,13 +12,8 @@ angular.module('starter.controllers.advertiser', [])
 
   init();
   function init() {
-    // var path = 'native_advertising/buy_side/';
-    // var id = user.info().member.selected_advertiser.id;
     var params = {params: {advertiser_id: ADVERTISER_ID}};
 
-    // var ios = api.get(path + 'insertion_order', params);
-    // var lineItems = api.get(path + 'line_item', params);
-    // var tactics = api.get(path + 'tactic', params);
     api.get(BUYSIDE_URL + 'creative_library', params)
        .then(qTest('creative libraries success'), qTest('creative libraries error'))
        .then(getData('data'))
@@ -34,9 +29,6 @@ angular.module('starter.controllers.advertiser', [])
        .then(getData('report_id'))
        .then(generateReport)
        .then(qTest('what is my reporting data!'));
-
-    // var deferreds = [ios, lineItems, tactics, cl];
-    // $q.all(deferreds).then(success);
   }
 
   function qTest(message, bool){

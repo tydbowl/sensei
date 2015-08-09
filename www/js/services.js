@@ -57,9 +57,9 @@ angular.module('starter.services', [])
     return def.promise;
   }
 
-  function displayReport(resp, format, size, offset) {
+  function displayReport(reportId, format, size, offset) {
     var params = {
-      id: resp.data.report_id,
+      id: reportId,
       format: format || 'json',
       size: size || 10,
       offset: offset || 0

@@ -1,8 +1,8 @@
-angular.module('starter.services', [])
+angular.module('starter.services', ['starter.constants'])
 
-.factory('api', ['$http', function api($http) {
+.factory('api', ['$http', 'env', function api($http, env) {
   function httpFactory(method) {
-    var ROOT_URL = 'http://sand-api.triplelift.net/'
+    var ROOT_URL = env.dev;
     return function httpRequest(url, params, config) {
       config = config || {};
       return $http[method](ROOT_URL + url, params, config);

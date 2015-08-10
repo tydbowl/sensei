@@ -10,7 +10,12 @@ angular.module('starter', [
   'starter.controllers',
   'starter.controllers.login',
   'starter.controllers.advertiser',
-  'starter.services'
+  'starter.services',
+  'reporting.directive',
+  'reporting.service',
+  'reporting.filters',
+  'reporting.constants',
+  'starter.constants'
 ])
 
 .run(function($ionicPlatform) {

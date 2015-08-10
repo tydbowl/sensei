@@ -12,3 +12,12 @@
 .list .item.item-accordion.ng-hide-remove {
   display: block !important;
 }
+
+div.chart-spinner {
+  text-align: center;
+}
+
+.chart-spinner svg {
+  width: 19% !important;
+  height: 45px !important;
+}

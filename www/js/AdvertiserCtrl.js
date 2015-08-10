@@ -2,16 +2,21 @@ angular.module('starter.controllers.advertiser', [])
 
 .controller('AdvertiserCtrl', function($scope, $stateParams, api, $q, reporting){
   $scope.$watch('creativeLibraries', qTest('creativeLibraries'));
+  $scope.$watch('cachedReports', qTest('cachedReports'));
 
   var BUYSIDE_URL   = 'native_advertising/buy_side/';
   var REPORTING_URL = 'reporting/report_info';
 
   var ADVERTISER_ID = $stateParams.advertiserId;
 
-  $scope.advertiserId = ADVERTISER_ID;
+  $scope.advertiserId  = ADVERTISER_ID;
+  $scope.loading       = [];
+  $scope.cachedReports = [];
 
-  $scope.expand   = expand;
-  $scope.collapse = collapse;
+  $scope.expand    = expand;
+  $scope.collapse  = collapse;
+  $scope.isLoading = isLoading;
+  $scope.chartReady = chartReady;
 
   init();
   function init() {
@@ -24,14 +29,6 @@ angular.module('starter.controllers.advertiser', [])
        .then(setData($scope, 'creativeLibraries'))
        .then(resolveOrReject(hasLength))
        .then(indexIntoArrAt([0]), qTest('no creative libraries', true))
-       .then(getDataForEach('id'))
-       .then(qTest('what are my reporting cl ids'))
-       .then(reportingPost(makeReportingParams))
-       .then(qTest('reporting data'))
-       .then(getData('data'))
-       .then(getData('report_id'))
-       .then(generateReport)
-       .then(qTest('what is my reporting data!'));
   }
 
   function qTest(message, bool){
@@ -72,6 +69,13 @@ angular.module('starter.controllers.advertiser', [])
     };
   }
 
+  function setDataInArray(obj, propName, index) {
+    return function(data){
+      obj[propName][index] = data;
+      return data;
+    }
+  }
+
   function resolveOrReject(whenFn){
     return function(data){
       var deferred = $q.defer();
@@ -92,12 +96,12 @@ angular.module('starter.controllers.advertiser', [])
     return bool ? $q.reject(returnVal) : returnVal;
   }
 
-  function reportingPost(paramsMaker){
-    return function(creativeLibraryIds){
-      var params = paramsMaker(creativeLibraryIds);
+  function reportingPost(params){
+ //   return function(creativeLibraryIds){
+//      var params = paramsMaker(creativeLibraryIds);
       console.log("reporting params: ", params);
       return api.post(REPORTING_URL, params);
-    };
+//    };
   }
 
   function makeReportingParams(creativeLibraryIds){
@@ -116,12 +120,46 @@ angular.module('starter.controllers.advertiser', [])
     return reporting.displayReport(reportId);
   }
 
-  function expand(index){
-    $scope.openIndex = index;
+  function expand($index){
+    startLoading($index);
+    $scope.openIndex = $index;
+    var cl_id = $scope.creativeLibraries[$index]['id'];
+    var params = makeReportingParams([cl_id]);
+    reportingPost(params)
+       .then(qTest('reporting data'))
+       .then(getData('data'))
+       .then(getData('report_id'))
+       .then(generateReport)
+       .then(qTest('what is my reporting data!'))
+    // prob do some shyte with d3, yeah?
+       .then(doneLoadingFn($index));
   }
 
-  function collapse(index){
+  function collapse($index){
     $scope.openIndex = -1;
   }
+
+  function isLoading($index) {
+    console.log("isLoading Called:" + $scope.loading[$index]);
+    return $scope.loading[$index];
+  }
+
+  function startLoading($index){
+    $scope.loading[$index] = true;
+  }
+
+  function doneLoadingFn($index) {
+    return function(data){
+      $scope.cachedReports[$index] = data;
+      $scope.loading[$index] = false;
+      return data;
+    }
+  }
+
+  function chartReady($index){
+    return !isLoading($index) && angular.isDefined($scope.cachedReports[$index]);
+  }
+
+
 
 });

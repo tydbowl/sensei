@@ -14,14 +14,20 @@
           <img src="{{cl.assets[0].image_url_thumb}}">
           <h2>{{cl.name ? cl.name : cl.id}}</h2>
           <p>{{cl.name ? cl.id : ''}}</p>
-          <i ng-if="openIndex !== $index" class="icon ion-chevron-down icon-accessory"></i>
-          <i ng-if="openIndex === $index" class="icon ion-chevron-right icon-accessory"></i>
+          <i class="icon ion-chevron-down icon-accessory"
+             ng-class="openIndex === $index ? 'icon-chevron-right' : 'icon-chevron-down'">
+          </i>
         </ion-item>
-        <ion-item class="item-card item-accordian"
+        <ion-item class="item-accordian"
                   ng-show="openIndex === $index">
-            <h2>{{cl.id}}'s inline chart goes here instead of the below pic!</h2>
-            <p>Maybe a loading icon while the chart is actually loading?</p>
+          <h2>{{cl.id}}'s inline chart goes here instead of the below pic!</h2>
+          <div ng-show="isLoading($index)"
+               class="chart-spinner">
+            <ion-spinner icon="dots"></ion-spinner>
+          </div>
+          <div ng-show="chartReady($index)">
             <img src="{{cl.assets[0].image_url}}">
+          </div>
         </ion-item>
       </div>
     </ion-list>

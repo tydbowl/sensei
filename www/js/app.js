@@ -10,12 +10,13 @@ angular.module('starter', [
   'starter.controllers',
   'starter.controllers.login',
   'starter.controllers.advertiser',
-  'starter.services',
   'reporting.directive',
   'reporting.service',
   'reporting.filters',
   'reporting.constants',
-  'starter.constants'
+  'starter.constants',
+  'starter.controllers.advertiser_select',
+  'starter.services'
 ])
 
 .run(function($ionicPlatform) {
@@ -63,6 +64,12 @@ angular.module('starter', [
   .state('advertiser', {
     url          : '/advertiser/:advertiserId',
     templateUrl  : 'templates/advertiser.html',
+    controller   : 'AdvertiserCtrl'
+  })
+
+  .state('tactic', {
+    url          : '/tactic',
+    templateUrl  : 'templates/tactic.html',
     controller   : 'AdvertiserCtrl'
   })
 

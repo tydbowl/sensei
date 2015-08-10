@@ -1,5 +1,4 @@
 /* Empty. Add your own CSS if you like */
-
 .main-background {
   background-color: #1C2528;
 }
@@ -26,6 +25,10 @@
   color: white;
   font-weight: bold;
   border-color: transparent;
+}
+
+.no-border {
+  border: none;
 }
 
 .reporting-template {
@@ -102,6 +105,17 @@
   background-color: #1C2528;
 }
 
+.reporting-template .cat-name .item-content{
+  background-color: #1C2528;
+  color: #AEB2B7;
+  font-size: 14px;
+  border-bottom: 1px solid #aeb2b7;
+}
+
+ion-item.item-button {
+  border: none;
+}
+
 .advertiser-list {
   background-color: #263238;
   color: white;
@@ -168,4 +182,34 @@
   padding-top: 100px;
   padding-bottom: 100px;
   color: #aeb2b7;
+}
+
+.list .item.item-accordion {
+  line-height: 38px;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: 1s all linear;
+}
+
+.list .item.item-accordion.ng-hide {
+  line-height: 0px;
+}
+.list .item.item-accordion.ng-hide-add,
+.list .item.item-accordion.ng-hide-remove {
+  display: block !important;
+}
+
+div.chart-spinner {
+  text-align: center;
+  vertical-align: middle;
+   height: 400px;
+   width: 400px;
+}
+
+.chart-spinner svg {
+  width: 19% !important;
+  height: 45px !important;
+  vertical-align: middle;
+  position: relative;
+  top: 180px;
 }

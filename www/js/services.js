@@ -32,6 +32,77 @@ angular.module('starter.services', ['starter.constants'])
 
 })
 
+.factory('reporting', function($timeout, $q, api) {
+
+  return {
+    runReport: runReport,
+    emailReport: emailReport,
+    displayReport: displayReport,
+    exportReport: exportReport,
+    fromScheduled: false
+  };
+
+  function runReport(report) {
+    return api.post('reporting/report_info', report);
+  }
+
+  function exportReport(resp, format) {
+    var params = {
+      id: resp.data.report_id,
+      format: format || 'csv'
+    };
+    var def = $q.defer();
+
+    reportGet(params).then(pollReports(params, def));
+    return def.promise;
+  }
+
+  function displayReport(reportId, format, size, offset) {
+    var params = {
+      id: reportId,
+      format: format || 'json',
+      size: size || 10,
+      offset: offset || 0
+    };
+    var def = $q.defer();
+
+    reportGet(params).then(pollReports(params, def));
+    return def.promise;
+  }
+
+  function emailReport(resp, report) {
+    var params = {
+      id: resp.data.report_id,
+      format: report.format,
+      emails: report.emails
+    };
+    var def = $q.defer();
+
+    reportGet(params).then(pollReports(params, def));
+    return def.promise;
+  }
+
+  function pollReports(params, def) {
+    //console.log(params.id); //for debugging
+    return function(resp) {
+      var status = resp.data.report_status;
+      if (status === 'complete') {
+        def.resolve(resp);
+      } else if (status === 'pending') {
+        $timeout(function() {
+          reportGet(params).then(pollReports(params, def));
+        }, 1000);
+      } else {
+        // TODO: handle error
+      }
+    };
+  }
+
+  function reportGet(params) {
+    return api.get('reporting/async_report', { params : params });
+  }
+})
+
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
 

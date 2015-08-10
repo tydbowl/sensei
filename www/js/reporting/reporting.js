@@ -1,7 +1,7 @@
 angular.module('reporting.directive', ['reporting.service'])
 
 .directive('reportingDv',
-  function ($window, $parse, d3Service, metrics){
+  function ($window, $parse, $state, d3Service, metrics){
 
     var width = '300';
     var height = '300';
@@ -27,6 +27,7 @@ angular.module('reporting.directive', ['reporting.service'])
       scope.agg = {};
       scope.empty = false;
       scope.getNewMonthData = getNewMonthData;
+      scope.state = $state;
 
       var d3 = $window.d3, _  = $window._;
       var JSON;

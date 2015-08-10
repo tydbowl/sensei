@@ -1,0 +1,31 @@
+<ion-list>
+  <div ng-repeat="cl in creativeLibraries track by $index">
+    <ion-item class="item-thumbnail item-thumbnail-left item-icon-right" type="item-text-wrap" on-tap="openIndex === $index ? collapse($index) : expand($index)">
+<!--    This doesn't work with item-thumbnail... needs
+      to be a grid layout or something.
+        <img ng-repeat="asset in cl.assets track by $index"
+             class="pull-left"
+             ng-show="$index <= 3"
+             src="{{asset.image_url_thumb}}" height="45" width="45" class="margin-3">
+      So for now, just show the first one!
+-->
+      <img src="{{cl.assets[0].image_url_thumb}}">
+      <h2>{{cl.name ? cl.name : cl.id}}</h2>
+      <p>{{cl.name ? cl.id : ''}}</p>
+      <i class="icon ion-chevron-down icon-accessory"
+         ng-class="openIndex === $index ? 'icon-chevron-right' : 'icon-chevron-down'">
+      </i>
+    </ion-item>
+    <ion-item class="item-accordian"
+              ng-show="openIndex === $index">
+      <h2>{{cl.id}}'s inline chart goes here instead of the below pic!</h2>
+      <div ng-show="isLoading($index)"
+           class="chart-spinner">
+        <ion-spinner icon="dots"></ion-spinner>
+      </div>
+      <div ng-show="chartReady($index)">
+        <img height="400px" width="400px" src="{{cl.assets[0].image_url}}">
+      </div>
+    </ion-item>
+  </div>
+</ion-list>

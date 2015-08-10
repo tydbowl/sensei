@@ -19,7 +19,7 @@ angular.module('reporting.directive', ['reporting.service'])
     };
 
     function link(scope, elem, attrs) {
-      scope.tab="category";
+      scope.tab="metrics";
       scope.category="";
       scope.drawLineChart = drawLineChart;
       scope.tCategory ="spend";
@@ -146,7 +146,7 @@ angular.module('reporting.directive', ['reporting.service'])
 
         xScale = d3.time.scale()
           .domain([mindate, maxdate])
-          .range([10, width-20]);
+          .range([10, width-80]);
 
         yScale = d3.scale.linear()
           .domain([0, d3.max(d3.values(collection[plot_metric]))])
@@ -156,12 +156,14 @@ angular.module('reporting.directive', ['reporting.service'])
           .scale(xScale)
           .orient("bottom")
           .ticks(d3.time.months)
-          .tickFormat(d3.time.format("%B %Y"));
+          .tickFormat(d3.time.format("%B %Y"))
+          .tickSize(0);
 
         yAxisGen = d3.svg.axis()
           .scale(yScale)
           .orient("left")
-          .ticks(5);
+          .ticks(5)
+          .tickSize(-5);
 
         lineFun = d3.svg.line()
           .x(function (d) {

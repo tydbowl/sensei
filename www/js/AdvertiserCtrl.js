@@ -20,6 +20,11 @@ angular.module('starter.controllers.advertiser', [])
 
   init();
   function init() {
+    api.get('advertiser?id='+ADVERTISER_ID)
+    .then(getData('data'))
+    .then(getData('advertiser'))
+    .then(setData($scope, 'advertiser'));
+
     var params = {params: {advertiser_id: ADVERTISER_ID}};
 
     api.get(BUYSIDE_URL + 'creative_library', params)

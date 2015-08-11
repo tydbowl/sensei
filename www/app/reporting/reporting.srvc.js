@@ -8,10 +8,7 @@ angular.module('reporting.service', [])
   var getUrl = baseUrl + 'reporting/async_report';
   var postUrl = baseUrl + 'reporting/report_info';
   var today = new Date(Date.now());
-
-  var metrics = ['imps', 'clicks', 'mouseovers', 'shares', 'social', 'ctr', 'mouserate', 'spend'];
-
-  this.metrics = metrics;
+  var group_by = [], filter;
 
   this.getReportID = function(cb) {
     var params = {
@@ -21,7 +18,7 @@ angular.module('reporting.service', [])
       "filters": {},
       "format": "json",
       "report_for": "advertiser",
-      "group_by": ["ymd", "tactic_id"], // only tactic level reporting for now
+      "group_by": group_by, // only tactic level reporting for now
       "title": "Report" }
 
     $http.post(postUrl, params)
@@ -37,13 +34,10 @@ angular.module('reporting.service', [])
 
   function pollReports(params, def, cb) {
     return function(resp) {
-      console.log(cb);
       var status = resp.data.report_status;
       if (status === 'complete') {
-        console.log('completed');
         def.resolve(cb(resp));
       } else if (status === 'pending') {
-        console.log('pending');
         $timeout(function() {
           getJSON(params).then(pollReports(params, def, cb));
         }, 1000);
@@ -110,7 +104,6 @@ angular.module('reporting.service', [])
       _start_date = start_year+'-'+start_month+'-01';
       _end_date = end_year+'-'+end_month+'-01';
       new Date(today.setMonth(today.getMonth() - 1)); //reset
-      console.log(_start_date, _end_date);
       return today;
     }
   }
@@ -119,27 +112,20 @@ angular.module('reporting.service', [])
     _advertiser_id = advertiser;
   }
 
+  this.setGroup = function(group) {
+    group_by = group.concat("ymd");
+  }
+
+  this.setFilter = function(filter) {
+    filter = filter;
+  }
+
   function getParams(report_id, limit) {
     return {
       id: report_id,
       format: 'json',
       size: limit,
       offset: 0
-    }
-  }
-
-
-
-  this.map = function(name) {
-    switch (name) {
-      case 'imps': return 'Impressions'; break;
-      case 'clicks': return 'Clicks'; break;
-      case 'mouseovers': return 'Mouseovers'; break;
-      case 'shares': return 'Shares'; break;
-      case 'social': return 'Social'; break;
-      case 'ctr': return 'Click Through Rate'; break;
-      case 'mouserate': return 'Mouse Rate'; break;
-      case 'spend': return 'Spend'; break;
     }
   }
 });

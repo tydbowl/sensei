@@ -1,9 +1,11 @@
 angular.module('starter.controllers.advertiser', [
   'reporting.constants',
-  'reporting.service'
+  'reporting.service',
+  'reporting.map'
 ])
 
-.controller('AdvertiserCtrl', function($scope, $stateParams, api, $q, reporting, metrics, $state){
+.controller('AdvertiserCtrl',
+  function($scope, $stateParams, api, $q, reporting, metrics, $state, hierarchy, reportingMap){
   $scope.$watch('creativeLibraries', qTest('creativeLibraries'));
   $scope.$watch('cachedReports', qTest('cachedReports'));
 
@@ -14,7 +16,7 @@ angular.module('starter.controllers.advertiser', [
   var ADVERTISER_ID = 30;
 
   $scope.advertiserId  = ADVERTISER_ID;
-  $scope.metrics       = metrics;
+  $scope.hierarchy     = hierarchy;
   $scope.loading       = [];
   $scope.cachedReports = [];
 
@@ -24,6 +26,7 @@ angular.module('starter.controllers.advertiser', [
   $scope.chartReady = chartReady;
   $scope.state = $state;
   $scope.test = test;
+  console.log($state.current.name);
 
    function test(message){
     console.log(message);

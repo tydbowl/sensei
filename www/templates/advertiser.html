@@ -1,5 +1,15 @@
-<ion-view view-title="{{advertiserId || 'I Am Advertiser'}}">
-  <ion-content class="padding main-background">
-    <reporting-dv advertiser-id=advertiserId></reporting-dv>
+<ion-nav-bar>
+  <ion-nav-back-button>
+  </ion-nav-back-button>
+</ion-nav-bar>
+<ion-view view-title="{{advertiser.name}}">
+  <ion-content class="padding adv-background">
+    <!-- <reporting-dv advertiser-id=advertiserId></reporting-dv> -->
+    <ion-list>
+      <ion-item class="advertiser-list"
+                ng-repeat="h in hierarchy"
+                on-tap="state.go('reporting.{{h.state}}', {advertiserId: advertiserId})">{{h.name | uppercase}}
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>

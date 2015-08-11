@@ -1,0 +1,97 @@
+<ion-nav-bar class="bar-positive"></ion-nav-bar>
+<ion-view view-title="{{advertiser}}" class="reporting-template">
+  <ion-content class="padding main-background">
+      <table>
+        <tr>
+          <th class="reporting-header">
+            <div ng-show="data.name==='all'">
+              <span class="table-stat">All {{state.current.name | typeMap}}</span>
+            </div>
+            <div ng-show="data.name!=='all'">
+              <span class="table-stat">{{data.name}}</span>
+            </div>
+          </th>
+        </tr>
+      </table>
+      <div class="graph-section" on-swipe-left="getNewMonthData('next')" on-swipe-right="getNewMonthData('previous')">
+      <h3>{{today | date:'MMMM' | uppercase}}</h3>
+      <div ng-show="data.name==='all'">
+        <h5 class="tactic-detail" ng-hide="data.metric==='spend'">{{data.metric || 'spend' | metricMap}}: {{data.collection_agg[data.metric] || '' | number}}</h5>
+        <h5 class="tactic-detail" ng-show="data.metric==='spend'">{{data.metric || 'spend' | metricMap}}: {{data.collection_agg[data.metric] || '' | currency}}</h5>
+      </div>
+      <div ng-show="data.name!=='all'">
+        <h5 class="tactic-detail" ng-hide="data.metric==='spend'">{{data.metric || 'spend' | metricMap}}: {{agg[data.name].agg[data.metric] || '' | number}}</h5>
+        <h5 class="tactic-detail" ng-show="data.metric==='spend'">{{data.metric || 'spend' | metricMap}}: {{agg[data.name].agg[data.metric] || '' | currency}}</h5>
+      </div>
+        <!-- SVG -->
+        <line-graph data="data" ng-show="!empty"></line-graph>
+
+      <h1 class="no-data" ng-show="empty">No Data</h1>
+    </div>
+    <table class="categories">
+      <tr>
+        <th class="report-tab" 
+            ng-class="{'selected-tab': tab === '{{state.current.name | typeMap}}'}"
+            ng-click="tab='{{state.current.name | typeMap}}'"><i class="fa fa-sitemap"><i> {{state.current.name | typeMap | uppercase}}
+        </th>
+        <th class="report-tab"
+            ng-class="{'selected-tab': tab === 'metrics'}"
+            ng-click="tab='metrics'"><i class="fa fa-star"><i> METRICS
+        </th>
+      </tr>
+    </table>
+    <div class="selection">
+      <ion-scroll zooming='false' direction="y" style="height: 200px;" ng-show="tab==='metrics'">
+         <ion-list
+          class="cat-name"
+          ng-repeat="m in metrics track by $index"
+          ng-click="data.metric=m.name;
+                    data.metric=m.name;
+                    data.name='all'">
+          <div class="row">
+            <div class="col col-50 center-align">
+              <i class="{{m.icon}}"></i> 
+              {{m.name | metricMap}}
+            </div>
+            <div class="col col-50" ng-show="data.name !== 'all' && !empty">
+              <span ng-show="m.name!=='spend'">{{agg[data.name].agg[m.name] | number}}</span>
+              <span ng-show="m.name==='spend'">{{agg[data.name].agg[m.name] | currency}}</span>
+            </div>
+            <div class="col col-50" ng-show="data.name === 'all' && !empty">
+              <span ng-show="m.name!=='spend'">{{data.collection_agg[m.name] | number}}</span>
+              <span ng-show="m.name==='spend'">{{data.collection_agg[m.name] | currency}}</span>
+            </div>
+            <div class="col col-50" ng-show="empty">
+              <span class="orange">-</span>
+            </div>
+          </div>
+        </ion-list>
+      </ion-scroll>
+
+      <ion-scroll zooming='false' direction="y" style="height: 200px;" ng-show="tab==='{{state.current.name | typeMap}}'">
+        <ion-list>
+          <ion-item
+            ng-hide="empty"
+            class="item-button button-dark cat-name type-name left-align"
+            ng-repeat="n in names track by $index"
+            ng-click="data.name = n">
+            <div class="row">
+              <div class="col col-90">
+                {{n}}
+              </div>
+              <div class="col col-10">
+                <i class="fa fa-circle tactic-circle"
+                   style="color: {{color(n)}};"></i>
+              </div>
+            </div>
+            <ion-option-button class="button-orange 80-height"
+                on-tap="state.go('reporting.{{state.current.name | nextState}}')">
+              {{state.current.name | nextStateTitle | uppercase}}
+            </ion-option-button>
+          </ion-item>
+        </ion-list>
+        <h4 ng-show="empty">No {{state.current.name | typeMap}} Available</h4>
+      </ion-scroll>
+      </div>
+  </ion-content>
+</ion-view>

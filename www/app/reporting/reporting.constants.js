@@ -34,3 +34,24 @@ angular.module('reporting.constants', [])
     icon: 'fa fa-reply-all'
   }
 ])
+
+.constant('hierarchy', [
+  {
+    name: 'Insertion Orders',
+    state: 'insertion-orders'
+  },
+  {
+    name: 'Line Items',
+    state: 'line-items'
+  },
+  {
+    name: 'Tactics',
+    state: 'tactics'
+  },
+  {
+    name: 'Creative Libraries',
+    state: 'creative-libraries'
+  }
+])
+
+.constant('keys', ['date', 'name', 'imps', 'clicks', 'mouseovers', 'shares', 'social', 'ctr', 'mouserate', 'spend']);

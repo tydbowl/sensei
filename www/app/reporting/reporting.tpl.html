@@ -1,18 +1,11 @@
 <ion-nav-bar class="bar-positive"></ion-nav-bar>
 <ion-view view-title="{{advertiser}}" class="reporting-template">
+<ion-header-bar align-title="center" class="bar-subheader bar-orange">
+  <h1 class="title">
+    {{!data.name==='all' ? '' : 'All '}}{{!data.name==='all' ? data.name : state.current.name | typeMap}}
+  </h1>
+</ion-header-bar>
   <ion-content class="padding main-background">
-      <table>
-        <tr>
-          <th class="reporting-header">
-            <div ng-show="data.name==='all'">
-              <span class="table-stat">All {{state.current.name | typeMap}}</span>
-            </div>
-            <div ng-show="data.name!=='all'">
-              <span class="table-stat">{{data.name}}</span>
-            </div>
-          </th>
-        </tr>
-      </table>
       <div class="graph-section" on-swipe-left="getNewMonthData('next')" on-swipe-right="getNewMonthData('previous')">
       <h3>{{today | date:'MMMM' | uppercase}}</h3>
       <div ng-show="data.name==='all'">

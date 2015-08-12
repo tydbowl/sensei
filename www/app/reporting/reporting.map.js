@@ -11,6 +11,7 @@ angular.module('reporting.map', [])
       case 'ctr': return 'Click Through Rate'; break;
       case 'mouserate': return 'Mouse Rate'; break;
       case 'spend': return 'Spend'; break;
+      default: return name;
     }
   }
 
@@ -20,6 +21,7 @@ angular.module('reporting.map', [])
       case 'reporting.line-items': return 'line_item_id'; break;
       case 'reporting.tactics': return 'tactic_id'; break;
       case 'reporting.creative-libraries': return 'creative_library_id'; break;
+      default: return type;
     }
   }
 
@@ -29,6 +31,7 @@ angular.module('reporting.map', [])
       case 'reporting.line-items': return 'Line Items'; break;
       case 'reporting.tactics': return 'Tactics'; break;
       case 'reporting.creative-libraries': return 'Creatives'; break;
+      default: return type;
     }
   }
 

@@ -6,7 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', [
-  'ionic',
+  'ionic','ionic.service.core','ionic.service.deploy',
   'starter.controllers',
   'starter.controllers.login',
   'starter.controllers.advertiser',
@@ -66,7 +66,7 @@ angular.module('starter', [
 
   .state('advertiser', {
     url          : '/advertiser/:advertiserId',
-    templateUrl  : 'templates/advertiser.html',
+    templateUrl  : 'templates/select-report.html',
     controller   : 'AdvertiserCtrl'
   })
 

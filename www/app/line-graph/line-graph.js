@@ -108,12 +108,22 @@ angular.module('reporting.graphs', [])
               var line = svg.append("svg:g")
                 .attr("class", name);
 
-              line.append('svg:path')
+              var path = line.append('svg:path')
                 .attr('d', lineFun(data_by_name[name]))
                 .attr("transform", "translate("+right_offset+", -"+ padding_adj*2 +")")
                 .attr('stroke', color(name))
                 .attr('stroke-width', 1)
                 .attr('fill', 'none');
+
+                var totalLength = path.node().getTotalLength();
+
+                path
+                  .attr("stroke-dasharray",totalLength + " " + totalLength)
+                  .attr("stroke-dashoffset", totalLength)
+                  .transition()
+                    .duration(2000)
+                    .ease("linear")
+                    .attr("stroke-dashoffset", 0);
             }
 
             var point = svg.append("svg:g")
@@ -137,10 +147,10 @@ angular.module('reporting.graphs', [])
               var line = svg.append("svg:g")
                 .attr("class", report_name);
 
-              line.append('svg:path')
-                .attr('d', lineFun(data_by_name[report_name]))
+              var path = line.append('svg:path')
+                .attr('d', lineFun(data_by_name[name]))
                 .attr("transform", "translate("+right_offset+", -"+ padding_adj*2 +")")
-                .attr('stroke', color(report_name))
+                .attr('stroke', color(name))
                 .attr('stroke-width', 1)
                 .attr('fill', 'none');
 

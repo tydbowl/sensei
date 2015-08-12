@@ -18,7 +18,16 @@
 }
 
 .adv-background {
-  background-color: #263238;
+  background-color: #0A1D31;
+}
+
+ion-header-bar.bar-orange {
+  border: none;
+  background-color: #FF6C60;
+}
+
+ion-header-bar.bar-orange h1{
+  color: white;
 }
 
 .button-orange {
@@ -163,11 +172,12 @@ ion-item.cat-name.creative-list {
 }
 
 .advertiser-list {
-  background-color: #263238;
+  background-color: #0A1D31;
   color: white;
   border: none;
   border-bottom: white 2px solid;
   text-align: center;
+  font-weight: 500;
 }
 
 .reporting-template .cat-name .list{

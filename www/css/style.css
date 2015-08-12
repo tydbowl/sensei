@@ -1,7 +1,7 @@
 /* Empty. Add your own CSS if you like */
-
+#0A1D31
 .main-background {
-  background-color: #1C2528;
+  background-color: #0A1D31;
 }
 
 .title-background {
@@ -48,7 +48,7 @@ ion-header-bar.bar-orange h1{
 }
 
 .reporting-template {
-  background-color: #1C2528;
+  background-color: #0A1D31;
   color: #aeb2b7;
   text-align: center;
 }
@@ -67,7 +67,7 @@ ion-header-bar.bar-orange h1{
 
 .item-options .button{
   height: 81%;
-  background-color: #1C2528;
+  background-color: #0A1D31;
   border: 1px solid #FF6C60;
   color: #FF6C60;
 }
@@ -87,7 +87,7 @@ ion-header-bar.bar-orange h1{
 
 .adv-buttons {
   background-color: #FF6C60;
-  /*background-color: #1C2528;*/
+  /*background-color: #0A1D31;*/
   /*border: 2px #FF6C60 solid;*/
   border: none;
   color: white;
@@ -145,11 +145,17 @@ ion-header-bar.bar-orange h1{
 .reporting-template .cat-name{
   width: 100%;
   text-align: center;
-  background-color: #1C2528;
+  background-color: #0A1D31;
+}
+
+.login-input label {
+  margin-left: 2em;
+  margin-top: 1em;
+  margin-right: 2em;
 }
 
 .reporting-template .cat-name .item-content{
-  background-color: #1C2528;
+  background-color: #0A1D31;
   color: #AEB2B7;
   font-size: 14px;
 }
@@ -159,7 +165,7 @@ ion-item.item-button {
 }
 
 ion-item.cat-name.creative-list {
-  background-color: #263238;
+  background-color: #0A1D31;
   border: none;
 }
 
@@ -210,7 +216,7 @@ ion-item.cat-name.creative-list {
 
 .reporting-template .cat-icons{
   text-align: center;
-  background-color: #1C2528;
+  background-color: #0A1D31;
   padding: 10px;
 }
 
@@ -235,13 +241,19 @@ ion-item.cat-name.creative-list {
 
 .reporting-template .graph-section {
   width: 100%;
-  background-color: #263238;
+  background-color: #0A1D31;
 }
 
 .reporting-template .no-data {
   padding-top: 100px;
   padding-bottom: 100px;
   color: #aeb2b7;
+}
+
+.padding-2em {
+  margin-top: 5em;
+  padding-left: 2em;
+  padding-right: 2em;
 }
 
 .list .item.item-accordion {

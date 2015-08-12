@@ -4,7 +4,7 @@
     <image src="http://www.triplelift.com/wp-content/uploads/2015/05/logo-trasnparent-all-white1.png" style="width: 100px; margin-top: 50px">
       <h4 class="title-signin">Advertiser Reporting</h4>
     </div>
-    <div class="list">
+    <div class="list login-input">
       <label class="item item-input">
         <span class="input-label">Username</span>
         <input type="text" ng-model="user.username">
@@ -14,15 +14,16 @@
         <input type="password" ng-model="user.password">
       </label>
     </div>
-    <div class="padding">
+    <div class="padding-2em">
       <button class="button button-block white button-orange" ng-click="signIn(user)">
         Sign-In
       </button>
-    </div>
-    <div class="padding" ng-show="error">
-      <button class="button button-clear button-assertive">
-        {{error}}
+      <button class="button button-block button-positive" ng-if="identified" ng-click="pushRegister()">
+        Register for Push
       </button>
     </div>
   </ion-content>
+  <div class="bar bar-footer bar-assertive" ng-style="{display: showError}">
+    <div class="title">{{error}}</div>
+  </div>
 </ion-view>

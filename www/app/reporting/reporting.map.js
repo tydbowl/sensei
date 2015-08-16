@@ -17,50 +17,55 @@ angular.module('reporting.map', [])
 
   this.stateDataMap = function(type) {
     switch (type) {
-      case 'reporting.insertion-orders': return 'insertion_order_id'; break;
-      case 'reporting.line-items': return 'line_item_id'; break;
-      case 'reporting.tactics': return 'tactic_id'; break;
-      case 'reporting.creative-libraries': return 'creative_library_id'; break;
+      case 'reporting-insertion-orders': return 'insertion_order_id'; break;
+      case 'reporting-line-items': return 'line_item_id'; break;
+      case 'reporting-tactics': return 'tactic_id'; break;
+      case 'reporting-creative-libraries': return 'creative_library_id'; break;
       default: return type;
     }
   }
 
   this.typeDataMap = function(type) {
     switch (type) {
-      case 'reporting.insertion-orders': return 'Insertion Orders'; break;
-      case 'reporting.line-items': return 'Line Items'; break;
-      case 'reporting.tactics': return 'Tactics'; break;
-      case 'reporting.creative-libraries': return 'Creatives'; break;
+      case 'reporting-insertion-orders': return 'Insertion Orders'; break;
+      case 'reporting-line-items': return 'Line Items'; break;
+      case 'reporting-tactics': return 'Tactics'; break;
+      case 'reporting-creative-libraries': return 'Creatives'; break;
       default: return type;
     }
   }
 
   this.stateNextMap = function(type) {
     switch (type) {
-      case 'reporting.insertion-orders':
+      case 'reporting-insertion-orders':
         return {
           title: 'Line Items',
-          state: 'line-items'
+          state: 'reporting-line-items'
         }
         break;
-      case 'reporting.line-items':
+      case 'reporting-line-items':
         return {
           title: 'Tactics',
-          state: 'tactics'
+          state: 'reporting-tactics'
         }
         break;
-      case 'reporting.tactics':
+      case 'reporting-tactics':
         return {
           title: 'Creatives',
-          state: 'creative-libraries'
+          state: 'reporting-creative-libraries'
         }
         break;
-      case 'reporting.creative-libraries':
+      case 'reporting-creative-libraries':
         return {
           title: 'Assets',
-          state: 'creative-assets'
+          state: 'reporting-creative-assets'
         }
         break;
+      default:
+        return {
+          title: '',
+          state: ''
+        }
     }
   }
 })

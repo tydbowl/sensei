@@ -81,7 +81,7 @@
               </div>
             </div>
             <ion-option-button class="button-orange 80-height"
-                on-tap="state.go('reporting.{{state.current.name | nextState}}')">
+                on-tap="state.go('{{state.current.name | nextState}}')">
               {{state.current.name | nextStateTitle | uppercase}}
             </ion-option-button>
           </ion-item>

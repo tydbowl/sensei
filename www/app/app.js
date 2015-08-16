@@ -70,40 +70,34 @@ angular.module('starter', [
     controller   : 'AdvertiserCtrl'
   })
 
-  .state('reporting', {
-    abstract     : true,
-    url          : '/reporting/:advertiserId',
-    template     : '<ui-view />',
-    controller   : 'AdvertiserCtrl'
-  })
-
-  .state('reporting.insertion-orders', {
+  .state('reporting-insertion-orders', {
     url          : '/insertion-orders',
-    templateUrl  : 'app/reporting/reporting.tpl.html',
+    templateUrl  : 'templates/reporting.tpl.html',
     controller   : 'ReportingCtrl'
   })
 
-  .state('reporting.line-items', {
+  .state('reporting-line-items', {
     url          : '/line-items',
-    templateUrl  : 'app/reporting/reporting.tpl.html',
+    templateUrl  : 'templates/reporting.tpl.html',
     controller   : 'ReportingCtrl'
   })
 
-  .state('reporting.tactics', {
+  .state('reporting-tactics', {
     url          : '/tactics',
-    templateUrl  : 'app/reporting/reporting.tpl.html',
+    templateUrl  : 'templates/reporting.tpl.html',
     controller   : 'ReportingCtrl'
   })
 
-  .state('reporting.creative-libraries', {
+  .state('reporting-creative-libraries', {
     url          : '/creatives',
-    templateUrl  : 'app/reporting/reporting.tpl.html',
+    templateUrl  : 'templates/reporting.tpl.html',
     controller   : 'ReportingCtrl'
   })
 
-  .state('reporting.creative-assets', {
+  .state('reporting-creative-assets', {
     url          : '/creatives',
-    templateUrl  : 'templates/creative-list.tpl.html'
+    templateUrl  : 'templates/creative-list.tpl.html',
+    controller   : 'AdvertiserCtrl'
   })
 
   // setup an abstract state for the tabs directive

@@ -38,19 +38,19 @@ angular.module('reporting.constants', [])
 .constant('hierarchy', [
   {
     name: 'Insertion Orders',
-    state: 'insertion-orders'
+    state: 'reporting-insertion-orders'
   },
   {
     name: 'Line Items',
-    state: 'line-items'
+    state: 'reporting-line-items'
   },
   {
     name: 'Tactics',
-    state: 'tactics'
+    state: 'reporting-tactics'
   },
   {
     name: 'Creative Libraries',
-    state: 'creative-libraries'
+    state: 'reporting-creative-libraries'
   }
 ])
 

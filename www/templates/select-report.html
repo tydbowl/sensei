@@ -10,7 +10,7 @@
     <ion-list>
       <ion-item class="advertiser-list"
                 ng-repeat="h in hierarchy"
-                on-tap="state.go('reporting.{{h.state}}', {advertiserId: advertiserId})">{{h.name}}
+                on-tap="state.go('{{h.state}}')">{{h.name}}
       </ion-item>
     </ion-list>
   </ion-content>

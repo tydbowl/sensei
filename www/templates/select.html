@@ -1,8 +1,15 @@
 <ion-view view-title="Select an Advertiser">
-  <ion-content class="padding">
+  <ion-content class="padding adv-background">
+    <div class="list list-inset" ng-show="advertisers && advertisers.length > 10">
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="Search" ng-model="search">
+      </label>
+    </div>
     <ion-list>
-      <ion-item ng-repeat="advertiser in advertisers">
-        <a>{{advertiser}}</a>
+      <ion-item class="advertiser-list" ng-repeat="advertiser in advertisers | filter:{name: search || ''}"
+                on-tap="test('hello'); goTo(advertiser.id)">
+        <a>{{advertiser.name}}</a>
       </ion-item>
     </ion-list>
   </ion-content>

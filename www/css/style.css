@@ -1,1 +1,171 @@
 /* Empty. Add your own CSS if you like */
+
+.main-background {
+  background-color: #1C2528;
+}
+
+.title-background {
+  background-image: url("http://www.triplelift.com/wp-content/uploads/2015/05/stock-photo-bromo-starry-night-71025777-waybetter.jpg");
+  background-position: center;
+}
+
+.title-signin {
+  color: #FF6C60;
+}
+
+.title-container {
+  width: 100%;
+}
+
+.adv-background {
+  background-color: #263238;
+}
+
+.button-orange {
+  background-color: #FF6C60;
+  color: white;
+  font-weight: bold;
+  border-color: transparent;
+}
+
+.reporting-template {
+  background-color: #1C2528;
+  color: #aeb2b7;
+  text-align: center;
+}
+
+.reporting-template h3 {
+  padding-top: 10px;
+  margin-bottom: 0;
+  color: #FF6C60;
+}
+
+.reporting-template h4 {
+  padding-top: 10px;
+  margin-bottom: 0;
+  color: #FF6C60;
+}
+
+.reporting-template h5{
+  color: white;
+}
+
+.orange{
+  color: #FF6C60;
+}
+
+.reporting-template svg {
+  margin-top: -10px;
+}
+
+.reporting-template .left-align .list {
+  text-align: left;
+  padding-left: 10px;
+  padding-right: 15px;
+}
+
+.left-align {
+  text-align: left;
+}
+
+.center-align {
+  text-align: center;
+}
+
+.reporting-template .reporting-header {
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+.reporting-template a {
+  color: inherit;
+}
+
+.reporting-template table {
+  width: 100%;
+}
+
+.reporting-template .table-stat{
+  font-weight: bold;
+}
+
+.reporting-template .categories{
+  width: 95%;
+  margin: auto;
+  border-right: 1px solid #aeb2b7;
+  border-left: 1px solid #aeb2b7;
+}
+
+.reporting-template .cat-name{
+  width: 100%;
+  text-align: center;
+  background-color: #1C2528;
+}
+
+.advertiser-list {
+  background-color: #263238;
+  color: white;
+  border: none;
+  border-bottom: white 1px solid;
+  text-align: center;
+}
+
+.reporting-template .cat-name .list{
+  border-bottom: 1px solid #aeb2b7;
+  padding-bottom: 10px;
+}
+
+.reporting-template .list {
+  margin-top: 15px;
+}
+
+.reporting-template .cat-name:last-of-type hr{
+  width: 95%;
+  border: none;
+}
+
+.reporting-template .selection {
+  text-align: center;
+}
+
+/*.reporting-template ion-scroll {
+  width: 95%;
+  border: 1px solid #aeb2b7;
+  margin: auto;
+}*/
+
+.reporting-template .cat-icons{
+  text-align: center;
+  background-color: #1C2528;
+  padding: 10px;
+}
+
+.reporting-template .report-tab {
+  width: 33%;
+  padding: 10px;
+  border-top: 1px #aeb2b7 solid;
+  border-bottom: 1px #aeb2b7 solid;
+}
+
+.reporting-template .selected-tab {
+  /*background-color: black;*/
+  border: 1px #FF6C60 solid;
+  color: #FF6C60;
+}
+
+.reporting-template .selected-cat {
+  /*background-color: black;*/
+  border-bottom: 1px #FF6C60 solid;
+  color: #FF6C60;
+}
+
+.reporting-template .graph-section {
+  width: 100%;
+  background-color: #263238;
+}
+
+.reporting-template .no-data {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  color: #aeb2b7;
+}

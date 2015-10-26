@@ -1,0 +1,97 @@
+<div class="reporting-template">
+      <table>
+        <tr>
+          <th class="reporting-header">
+            <div ng-show="tSelected==='all'">
+              <span class="table-stat" ng-hide="tCategory==='spend'">Total</span>
+              <span class="table-stat" ng-show="tCategory==='spend'">Total</span>
+            </div>
+            <div ng-show="tSelected!=='all'">
+              <span class="table-stat" ng-hide="tCategory==='spend'">{{tSelected}}</span>
+              <span class="table-stat" ng-show="tCategory==='spend'">{{tSelected}}</span>
+            </div>
+          </th>
+        </tr>
+      </table>
+      <div class="graph-section" on-swipe-left="getNewMonthData('next')" on-swipe-right="getNewMonthData('previous')">
+        <h3>{{today | date:'MMMM' | uppercase}}</h3>
+       <div ng-show="tSelected==='all'">
+          <h5 class="tactic-detail" ng-hide="tCategory==='spend'">{{tCategory || 'spend' | metricMap}}: {{collection_agg[tCategory] || '' | number}}</h5>
+          <h5 class="tactic-detail" ng-show="tCategory==='spend'">{{tCategory || 'spend' | metricMap}}: {{collection_agg[tCategory] || '' | currency}}</h5>
+        </div>
+        <div ng-show="tSelected!=='all'">
+          <h5 class="tactic-detail" ng-hide="tCategory==='spend'">{{tCategory || 'spend' | metricMap}}: {{agg[tSelected].agg[tCategory] || '' | number}}</h5>
+          <h5 class="tactic-detail" ng-show="tCategory==='spend'">{{tCategory || 'spend' | metricMap}}: {{agg[tSelected].agg[tCategory] || '' | currency}}</h5>
+        </div>
+        <svg width="300" height="300" ng-show="!empty"></svg>
+        <h1 class="no-data" ng-show="empty">No Data</h1>
+      </div>
+      <table class="categories">
+        <tr>
+          <th class="report-tab" 
+              ng-class="{'selected-tab': tab === 'tactic'}"
+              ng-click="tab='tactic'"><i class="fa fa-sitemap"><i> TACTIC
+          </th>
+          <th class="report-tab"
+              ng-class="{'selected-tab': tab === 'metrics'}"
+              ng-click="tab='metrics'"><i class="fa fa-star"><i> METRICS
+          </th>
+          <th class="report-tab"
+              ng-class="{'selected-tab': tab === 'library', 'disabled': empty}"
+              ng-click="tab='library'"><i class="fa fa-line-chart"><i> LIBRARIES
+          </th>
+        </tr>
+      </table>
+      <div class="selection">
+        <ion-scroll zooming='false' direction="y" style="height: 200px;" ng-show="tab==='metrics'">
+           <ion-list
+            class="cat-name"
+            ng-repeat="m in $parent.$parent.metrics track by $index"
+            ng-click="drawLineChart(m.name, 'all');
+                      $parent.$parent.tCategory=m.name;
+                      $parent.$parent.tSelected='all'">
+            <div class="row">
+              <div class="col col-50 center-align">
+                <i class="{{m.icon}}"></i> 
+                {{m.name | metricMap}}
+              </div>
+              <div class="col col-50" ng-show="$parent.$parent.tSelected !== 'all' && !$parent.$parent.empty">
+                <span ng-show="m.name!=='spend'">{{agg[$parent.$parent.tSelected].agg[m.name] | number}}</span>
+                <span ng-show="m.name==='spend'">{{agg[$parent.$parent.tSelected].agg[m.name] | currency}}</span>
+              </div>
+              <div class="col col-50" ng-show="$parent.$parent.tSelected === 'all' && !$parent.$parent.empty">
+                <span ng-show="m.name!=='spend'">{{$parent.$parent.collection_agg[m.name] | number}}</span>
+                <span ng-show="m.name==='spend'">{{$parent.$parent.collection_agg[m.name] | currency}}</span>
+              </div>
+              <div class="col col-50" ng-show="$parent.$parent.empty">
+                <span class="orange">-</span>
+              </div>
+            </div>
+          </ion-list>
+        </ion-scroll>
+
+        <ion-scroll zooming='false' direction="y" style="height: 200px;" ng-show="tab==='tactic'">
+          <ion-list
+            ng-hide="empty"
+            class="cat-name left-align"
+            ng-repeat="t in tactics track by $index"
+            ng-click="drawLineChart(tCategory, t); $parent.$parent.tSelected=t">
+            <div class="row">
+              <div class="col col-90">
+                {{t}}
+              </div>
+              <div class="col col-10">
+                <i class="fa fa-circle tactic-circle"
+                   style="color: {{color(t)}};"></i>
+              </div>
+            </div>
+          </ion-list>
+          <h4 ng-show="empty">No Tactics Available</h4>
+        </ion-scroll>
+
+        <ion-scroll zooming='false' direction="y" style="height: 200px;" ng-show="tab==='library'">
+          <h4 ng-show="empty">No Creative Libraries Available</h4>
+        </ion-scroll>
+
+      </div>
+</div>
